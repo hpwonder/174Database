@@ -1,35 +1,34 @@
-const express = require("express");
-const mysql = require("mysql");
-
+const express = require("express"); 
+const bodyParser = require('body-parser')
 const app = express();
+const mysql = require('mysql')
+const cors = require('cors'); 
 
-app.use(express.urlencoded({extended: true}));
-app.use(express.json());
 
-let connection = mysql.createConnection
-({
-    host: 'localhost',
-    port: 3001,
-    user: 'root',
-    password: 'Hpw@nders23',
-    database: 'online_vid_database'
+const db = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "Hpw@nders23",
+    database: "video_database",
 });
 
-connection.connect(function(err)
-{
-    if (err) throw err;
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.json());
+app.use(cors());
+
+app.post("/api/insert", (req, res)=> {
+    const providerName = req.body.providerName
+
+    const sqlInsert = "INSERT INTO video_provider (provider_name) VALUES (?)";
+
+    db.query(sqlInsert, [providerName], (err, result)=> {
+        console.log(err);
+    });
+
 });
 
 app.listen(3001, () =>
 {
-    console.log("Successful Connection");
+    console.log("running on port 3001");
 });
 
-app.get('/test', (req,res) => 
-{
-    connection.query('SELECT * FROM buys', (err,result)=>
-    {
-    if(err)throw err;
-    else{res.json(result);}
-    })
-});

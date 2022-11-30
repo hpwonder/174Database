@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from "react";
 import './App.css';
+import Axios from 'axios'
 
 function App() {
+  const [videoProvider, setVideoProvider] = useState("");
+
+  const submitProvider = () =>{
+    Axios.post('http://localhost:3001/api/insert', {
+      providerName: videoProvider
+    }).then(() => {
+      alert("successful insert");
+    });
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>174 APPLICATION</h1>
+
+      <div className="form">
+       <label>Video Provider</label>
+        <input type="text" name="videoProvider" onChange={(e)=> {
+          setVideoProvider(e.target.value)
+       }}/>
+
+      <button onClick={submitProvider}>Submit</button>
+
+      </div>
     </div>
   );
 }
