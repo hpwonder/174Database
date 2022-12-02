@@ -6,10 +6,10 @@ const cors = require('cors');
 
 
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "Hpw@nders23",
-    database: "video_database",
+    host: "us-cdbr-east-06.cleardb.net",
+    user: "b02c468b43712f",
+    password: "0f50b023",
+    database: "heroku_f8fe4bdcb79e1bd",
 });
 
 app.use(bodyParser.urlencoded({extended: true}));
