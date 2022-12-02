@@ -16,13 +16,20 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.json());
 app.use(cors());
 
+app.get("/api/get", (req,res) => {
+    const sqlSelect = "SELECT * FROM video_provider";
+    db.query(sqlSelect, (err, result) => {
+        res.send(result);
+    });
+});
+
 app.post("/api/insert", (req, res)=> {
     const providerName = req.body.providerName
 
-    const sqlInsert = "INSERT INTO video_provider (provider_name) VALUES (?)";
+    const sqlInsert = "INSERT INTO video_provider (provider_url) VALUES (?)";
 
     db.query(sqlInsert, [providerName], (err, result)=> {
-        console.log(err);
+        console.log(result);
     });
 
 });
