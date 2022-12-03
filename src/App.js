@@ -7,14 +7,14 @@ function App() {
   const [videoProviderList, setProviderList] = useState([])
 
   useEffect(()=>{
-    Axios.get('http://localhost:3001/api/get').then((response)=> {
+    Axios.get('http://localhost:3000/api/get').then((response)=> {
       console.log(response.data);
         setProviderList(response.data)
     })
   }, []);
 
   const submitProvider = () =>{
-    Axios.post('http://localhost:3001/api/insert', {
+    Axios.post('http://localhost:3000/api/insert', {
       providerName: videoProvider
     }).then(() => {
       alert("successful insert");
