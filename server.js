@@ -13,6 +13,7 @@ const db = mysql.createConnection({
 });
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static("build"));
 app.use(express.json());
 app.use(cors());
 
